@@ -1,0 +1,80 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "StudentTB",
+						"type": "DatasetReference"
+					},
+					"name": "StudentSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "TeacherTB",
+						"type": "DatasetReference"
+					},
+					"name": "TeacherSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TeacherStudentOutput",
+						"type": "DatasetReference"
+					},
+					"name": "sinkTS",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorageLS1",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          COURSE as string,",
+				"          DEMOCONDUCTED as string,",
+				"          ENGAGEMENTNUMBER as string,",
+				"          ENROLLED as string,",
+				"          ENROLLMENTNUMBER as string,",
+				"          GRADE as string,",
+				"          STUDENTFIRSTNAME as string,",
+				"          STUDENTLASTNAME as string,",
+				"          EMAILID as string,",
+				"          TEACHERIDMAP as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> StudentSource",
+				"source(output(",
+				"          TEACHERID as string,",
+				"          FIRSTNAME as string,",
+				"          LASTNAME as string,",
+				"          SESSIONHYGIENE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> TeacherSource",
+				"StudentSource, TeacherSource join(TEACHERIDMAP == TEACHERID,",
+				"     joinType:'outer',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     partitionFileNames:['TeacherStudentFinalOP'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkTS"
+			]
+		}
+	}
+}

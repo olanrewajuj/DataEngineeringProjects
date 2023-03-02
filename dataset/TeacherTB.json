@@ -1,0 +1,39 @@
+{
+	"name": "TeacherTB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TEACHER_TABLE.xlsx",
+				"container": "etlproject"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "TEACHER ID",
+				"type": "String"
+			},
+			{
+				"name": "FIRST NAME",
+				"type": "String"
+			},
+			{
+				"name": "LAST NAME",
+				"type": "String"
+			},
+			{
+				"name": "SESSION HYGIENE",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,63 @@
+{
+	"name": "StudentTB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "STUDENT_TABLE.xlsx",
+				"container": "etlproject"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "COURSE",
+				"type": "String"
+			},
+			{
+				"name": "DEMO CONDUCTED",
+				"type": "String"
+			},
+			{
+				"name": "ENGAGEMENT NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "ENROLLED",
+				"type": "String"
+			},
+			{
+				"name": "ENROLLMENT NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "GRADE",
+				"type": "String"
+			},
+			{
+				"name": "STUDENTFIRSTNAME",
+				"type": "String"
+			},
+			{
+				"name": "STUDENTLASTNAME",
+				"type": "String"
+			},
+			{
+				"name": "EMAILID",
+				"type": "String"
+			},
+			{
+				"name": "TEACHERIDMAP",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

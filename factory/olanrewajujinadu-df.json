@@ -1,0 +1,9 @@
+{
+	"name": "olanrewajujinadu-df",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "27cb4ec7-6e90-4a41-bce0-90b534b524db",
+		"tenantId": "65263544-8b95-4f94-aba4-4b14acc1e09c"
+	}
+}
